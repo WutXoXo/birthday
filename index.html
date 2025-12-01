@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>สุขสันต์วันเกิด! 🎉</title>
+    <title>สุขสันต์วันเกิด Little Film! 🎉</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap');
 
@@ -38,8 +38,61 @@
             padding: 20px;
         }
 
-        .dark-phase {
+        .waiting-phase {
             display: block;
+        }
+
+        .countdown-container {
+            color: #fff;
+            text-align: center;
+        }
+
+        .countdown-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #ff6b9d;
+        }
+
+        .countdown-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            min-width: 100px;
+        }
+
+        .time-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ff6b9d;
+            text-shadow: 0 0 20px #ff6b9d;
+        }
+
+        .time-label {
+            font-size: 1rem;
+            color: #fff;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
+
+        .waiting-message {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-top: 30px;
+            opacity: 0.9;
+        }
+
+        .dark-phase {
+            display: none;
         }
 
         .light-phase {
@@ -52,6 +105,11 @@
             position: relative;
             cursor: pointer;
             transition: transform 0.3s ease;
+        }
+
+        .cake-dark.disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
         }
 
         .candle {
@@ -80,6 +138,14 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .name-title {
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-shadow: 0 0 20px #ff6b9d;
+        }
+
         h1 {
             font-size: 3.5rem;
             font-weight: 700;
@@ -92,11 +158,19 @@
         }
 
         .thai-greeting {
-            font-size: 2rem;
+            font-size: 2.5rem;
             color: #ff6b9d;
-            font-weight: 600;
+            font-weight: 700;
             margin: 15px 0;
             text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .birthday-name {
+            font-size: 3rem;
+            color: #c44569;
+            font-weight: 700;
+            margin: 20px 0;
+            text-shadow: 3px 3px 6px rgba(196,69,105,0.3);
         }
 
         .message {
@@ -204,26 +278,62 @@
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .thai-greeting { font-size: 1.5rem; }
+            .thai-greeting { font-size: 1.8rem; }
+            .birthday-name { font-size: 2rem; }
             .message { font-size: 1.1rem; }
             .cake-dark, .cake-light { font-size: 5rem; }
             .instruction { font-size: 1.2rem; }
+            .name-title { font-size: 1.8rem; }
+            .countdown-title { font-size: 1.8rem; }
+            .time-box { min-width: 70px; padding: 15px; }
+            .time-number { font-size: 2rem; }
+            .time-label { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body class="dark">
     <div class="container">
+        <!-- นับถอยหลังถึงวันเกิด -->
+        <div class="waiting-phase" id="waitingPhase">
+            <div class="countdown-container">
+                <div class="countdown-title">🎂 วันเกิด Little Film 🎂</div>
+                <div class="countdown-display">
+                    <div class="time-box">
+                        <div class="time-number" id="days">0</div>
+                        <div class="time-label">วัน</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="time-number" id="hours">0</div>
+                        <div class="time-label">ชั่วโมง</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="time-number" id="minutes">0</div>
+                        <div class="time-label">นาที</div>
+                    </div>
+                    <div class="time-box">
+                        <div class="time-number" id="seconds">0</div>
+                        <div class="time-label">วินาที</div>
+                    </div>
+                </div>
+                <div class="waiting-message">รอหน่อยนะ... อีกไม่นานจะถึงวันพิเศษแล้ว! 💖</div>
+            </div>
+        </div>
+
+        <!-- โหมดมืด -->
         <div class="dark-phase" id="darkPhase">
+            <div class="name-title">Little Film</div>
             <div class="cake-dark" id="cakeWithCandle">
                 🎂
                 <div class="candle">🕯️</div>
                 <div class="flame" id="flame">🔥</div>
             </div>
-            <div class="instruction">คลิกที่เปลวไฟเพื่อเป่าเทียน 🌬️</div>
+            <div class="instruction">คลิกที่เค้กเพื่อเป่าเทียน 🌬️</div>
         </div>
 
+        <!-- โหมดสว่าง -->
         <div class="light-phase" id="lightPhase">
             <h1>🎊 สุขสันต์วันเกิด 🎊</h1>
+            <div class="birthday-name">Little Film</div>
             <div class="thai-greeting">วันนี้เป็นวันพิเศษของคุณ</div>
             <div class="decorative-icons">🌸 ✨ 🌺 ✨ 🌸</div>
             <div class="cake-light">🎂</div>
@@ -237,13 +347,45 @@
     </div>
 
     <script>
-        const flame = document.getElementById('flame');
+        const waitingPhase = document.getElementById('waitingPhase');
         const darkPhase = document.getElementById('darkPhase');
         const lightPhase = document.getElementById('lightPhase');
         const body = document.body;
         const cakeWithCandle = document.getElementById('cakeWithCandle');
+        const flame = document.getElementById('flame');
 
         let candleLit = true;
+
+        // กำหนดวันเกิด: 2 ธันวาคม 2025 เวลา 00:00:00
+        const birthdayDate = new Date('2025-12-02T00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = birthdayDate - now;
+
+            if (distance <= 0) {
+                // ถึงวันเกิดแล้ว! แสดงเค้กเทียน
+                waitingPhase.style.display = 'none';
+                darkPhase.style.display = 'block';
+                return;
+            }
+
+            // คำนวณเวลาที่เหลือ
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // อัพเดทตัวเลข
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+
+        // อัพเดทนับถอยหลังทุกวินาที
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
 
         // เป่าเทียน
         cakeWithCandle.addEventListener('click', function() {
@@ -272,7 +414,6 @@
 
         function createBalloons() {
             const balloons = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎈'];
-            const colors = ['#ff6b9d', '#ffc3a0', '#ff9a9e', '#fecfef', '#ff758c', '#ffb88c'];
             
             balloons.forEach((balloon, i) => {
                 const el = document.createElement('div');
