@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สุขสันต์วันเกิด! 🎉</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            transition: background 1s ease;
+        }
+
+        body.dark {
+            background: #0a0a0a;
+        }
+
+        body.light {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffecd2 100%);
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .dark-phase {
+            display: block;
+        }
+
+        .light-phase {
+            display: none;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .cake-dark {
+            font-size: 8rem;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .candle {
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            animation: candleGlow 2s ease-in-out infinite;
+        }
+
+        .flame {
+            font-size: 2rem;
+            position: absolute;
+            top: -70px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: flicker 0.3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px #ff6b00) drop-shadow(0 0 40px #ff6b00);
+        }
+
+        .instruction {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-top: 100px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff6b9d, #c44569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            animation: bounce 2s ease infinite;
+        }
+
+        .thai-greeting {
+            font-size: 2rem;
+            color: #ff6b9d;
+            font-weight: 600;
+            margin: 15px 0;
+            text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+        }
+
+        .message {
+            font-size: 1.3rem;
+            color: #555;
+            margin: 20px 0;
+            padding: 0 20px;
+            line-height: 1.8;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+
+        .decorative-icons {
+            font-size: 2.5rem;
+            margin: 10px;
+        }
+
+        .cake-light {
+            font-size: 8rem;
+            margin: 30px 0;
+            animation: celebration 1s ease;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 3.5rem;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+
+        .confetti {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 2rem;
+            animation: spin 10s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes flicker {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.9;
+            }
+        }
+
+        @keyframes candleGlow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes celebration {
+            0% { transform: scale(0.5) rotate(-10deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-40px) rotate(5deg); }
+        }
+
+        @keyframes confettiFall {
+            0% { 
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .thai-greeting { font-size: 1.5rem; }
+            .message { font-size: 1.1rem; }
+            .cake-dark, .cake-light { font-size: 5rem; }
+            .instruction { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body class="dark">
+    <div class="container">
+        <div class="dark-phase" id="darkPhase">
+            <div class="cake-dark" id="cakeWithCandle">
+                🎂
+                <div class="candle">🕯️</div>
+                <div class="flame" id="flame">🔥</div>
+            </div>
+            <div class="instruction">คลิกที่เปลวไฟเพื่อเป่าเทียน 🌬️</div>
+        </div>
+
+        <div class="light-phase" id="lightPhase">
+            <h1>🎊 สุขสันต์วันเกิด 🎊</h1>
+            <div class="thai-greeting">วันนี้เป็นวันพิเศษของคุณ</div>
+            <div class="decorative-icons">🌸 ✨ 🌺 ✨ 🌸</div>
+            <div class="cake-light">🎂</div>
+            <div class="message">
+                ขอให้มีความสุขมากๆ<br>
+                สุขภาพแข็งแรง ปราศจากโรคภัยไข้เจ็บ<br>
+                ประสบแต่ความสำเร็จในทุกๆ เรื่อง<br>
+                และมีรอยยิ้มตลอดปี 💖
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const flame = document.getElementById('flame');
+        const darkPhase = document.getElementById('darkPhase');
+        const lightPhase = document.getElementById('lightPhase');
+        const body = document.body;
+        const cakeWithCandle = document.getElementById('cakeWithCandle');
+
+        let candleLit = true;
+
+        // เป่าเทียน
+        cakeWithCandle.addEventListener('click', function() {
+            if (candleLit) {
+                candleLit = false;
+                
+                // ซ่อนเปลวไฟ
+                flame.style.animation = 'none';
+                flame.style.opacity = '0';
+                flame.style.transform = 'translateX(-50%) scale(0)';
+                
+                // รอครู่แล้วเปลี่ยนเป็นโหมดสว่าง
+                setTimeout(() => {
+                    darkPhase.style.display = 'none';
+                    lightPhase.style.display = 'block';
+                    body.classList.remove('dark');
+                    body.classList.add('light');
+                    
+                    // สร้างเอฟเฟกต์
+                    createBalloons();
+                    createFlowers();
+                    celebrate();
+                }, 500);
+            }
+        });
+
+        function createBalloons() {
+            const balloons = ['🎈', '🎈', '🎈', '🎈', '🎈', '🎈'];
+            const colors = ['#ff6b9d', '#ffc3a0', '#ff9a9e', '#fecfef', '#ff758c', '#ffb88c'];
+            
+            balloons.forEach((balloon, i) => {
+                const el = document.createElement('div');
+                el.className = 'balloon';
+                el.textContent = balloon;
+                el.style.left = `${(i + 1) * 15}%`;
+                el.style.animationDelay = `${i * 0.4}s`;
+                el.style.filter = `hue-rotate(${i * 30}deg) drop-shadow(0 5px 10px rgba(0,0,0,0.2))`;
+                document.body.appendChild(el);
+            });
+        }
+
+        function createFlowers() {
+            const flowers = ['🌸', '🌺', '🌼', '🌻', '🏵️'];
+            flowers.forEach((flower, i) => {
+                const el = document.createElement('div');
+                el.className = 'flower';
+                el.textContent = flower;
+                el.style.left = `${Math.random() * 90}%`;
+                el.style.top = `${Math.random() * 90}%`;
+                el.style.animationDuration = `${8 + Math.random() * 4}s`;
+                el.style.animationDelay = `${i * 0.5}s`;
+                document.body.appendChild(el);
+            });
+        }
+
+        function celebrate() {
+            const colors = ['#ff6b9d', '#ffc3a0', '#ff9a9e', '#fecfef', '#ff758c', '#ffb88c'];
+            
+            // สร้างกระดาษสี
+            for (let i = 0; i < 80; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 6000);
+            }
+        }
+    </script>
+</body>
+</html>
